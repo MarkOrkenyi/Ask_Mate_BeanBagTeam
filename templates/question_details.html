@@ -1,2 +1,49 @@
 <html>
+
+<head>
+    <title>Question details</title>
+    <style>
+        table {}
+        
+        th {
+            border: 1px solid black;
+        }
+        
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>{{question_title}}</h3>
+    <p>{{question_message}}</p>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Time</td>
+            <td>Views</td>
+            <td>Vote</td>
+        </tr>
+        <tr>
+            <td>{{question[0]}}</td>
+            <td>{{question[1]}}</td>
+            <td>{{question[2]}}</td>
+            <td>{{question[3]}}</td>
+        </tr>
+        <form action=./{{question_id}}/new-answer method="POST">
+            <p><input type="submit" name="New Answer" value=newanswer id=newanswer></p>
+        </form>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>Answer</td>
+            </tr>
+            {% for row in answers %}
+            <tr>
+                <td>{{row[0]}}</td>
+                <td>{{row[4]}}</td>
+            </tr>
+            {% endfor %}
+
 </html>
