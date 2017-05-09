@@ -3,7 +3,9 @@
 <head>
     <title>Question details</title>
     <style>
-        table {}
+        table {
+            border: 2px solid black;
+        }
         
         th {
             border: 1px solid black;
@@ -16,28 +18,32 @@
 </head>
 
 <body>
-    <h3>{{question_title}}</h3>
-    <p>{{question_message}}</p>
-    <table>
-        <tr>
-            <td>ID</td>
-            <td>Time</td>
-            <td>Views</td>
-            <td>Vote</td>
-        </tr>
-        <tr>
-            <td>{{question[0]}}</td>
-            <td>{{question[1]}}</td>
-            <td>{{question[2]}}</td>
-            <td>{{question[3]}}</td>
-        </tr>
+    <div>
+        <h3>{{question_title}}</h3>
+        <p>{{question_message}}</p>
+        <p>Details</p>
+        <table>
+            <tr>
+                <th align="center">ID</th>
+                <th align="center">Time</th>
+                <th align="center">Views</th>
+                <th align="center">Vote</th>
+            </tr>
+            <tr>
+                <td>{{question[0]}}</td>
+                <td>{{question[1]}}</td>
+                <td>{{question[2]}}</td>
+                <td>{{question[3]}}</td>
+            </tr>
+        </table>
+        <p>Answers</p>
         <form action=./{{question_id}}/new-answer method="POST">
-            <p><input type="submit" name="New Answer" value=newanswer id=newanswer></p>
+            <p><input type="submit" name="newanswer" value="New answer" id="newanswer"></p>
         </form>
         <table>
             <tr>
-                <td>ID</td>
-                <td>Answer</td>
+                <th align="center">ID</th>
+                <th align="center">Answer</th>
             </tr>
             {% for row in answers %}
             <tr>
@@ -45,5 +51,8 @@
                 <td>{{row[4]}}</td>
             </tr>
             {% endfor %}
+        </table>
+
+</body>
 
 </html>
