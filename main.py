@@ -27,5 +27,22 @@ def question_details(question_id):
                            question_id=question_id)
 
 
+# OLLE begins
+@app.route("/")
+@app.route("/list")
+def show_list():
+    '''Render the Questiontable'''
+    header_row = ["ID",
+                  "Title",
+                  "Message",
+                  "Views",
+                  "Votes",
+                  "",
+                  "Time",
+                  ]
+    question_table = function.read_csv("./data/question.csv", True)
+    return render_template('list.html', question_table=question_table, header_row=header_row)
+# OLLE end
+
 if __name__ == '__main__':
     app.run(debug=True)
