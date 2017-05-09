@@ -8,8 +8,9 @@ def read_csv(filename):
     return csv_content
 
 
-def write_csv(filename):
+def write_csv(filename, to_add):
     '''Writes out the list of lists to a csv file. ***REQUIRED: "csv_content" list of lists!*** '''
+    csv_content.append(to_add)
     with open(filename, mode="w") as data:
         datawriter = csv.writer(data, delimiter=',')
         for row in csv_content:
