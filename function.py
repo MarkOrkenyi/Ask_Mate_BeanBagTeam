@@ -1,3 +1,6 @@
+import csv
+
+
 def read_csv(filename):
     '''Opens csv file(filename) and returns a list of lists with it's content called ***"csv_content***"'''
     csv_content = []
