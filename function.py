@@ -20,6 +20,7 @@ def write_csv(filename, to_add, question):
     '''Writes out the list of lists to a csv file.
     \nUse: write_csv(<filename>,<a list of lists to add>,<True:question, False:answer>'''
     csv_content = read_csv(filename, question)
+    print(csv_content)
     csv_content.append(to_add)
     with open(filename, mode="w") as data:
         datawriter = csv.writer(data, delimiter=',')
