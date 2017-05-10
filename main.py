@@ -32,14 +32,14 @@ def question_details(question_id):
 
 @app.route("/question/<question_id>/new-answer", methods=['POST'])
 def new_answer(question_id):
-    return render_template("answer.html")
+    return render_template("answer.html", question_id=question_id)
 
 
 @app.route("/question/<question_id>/new-answer-submit", methods=['POST'])
 def add_new_answer(question_id):
     to_add = []
     time = datetime.datetime.now()
-    answer = str(request.form('newanswer'))
+    answer = str(request.form['newanswer'])
     to_add.append(function.get_new_id("./data/answer.csv"))
     to_add.append(time)
     to_add.append(0)

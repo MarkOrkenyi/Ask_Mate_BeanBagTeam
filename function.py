@@ -10,7 +10,7 @@ def read_csv(filename, question):
     with open(filename) as data:
         content = csv.reader(data, delimiter=',')
         for row in content:
-            row[1] = datetime.datetime.utcfromtimestamp(row[1])
+            row[1] = datetime.datetime.utcfromtimestamp(float(row[1]))
             row[4] = bytes.decode(base64.b64decode(row[4]))
             if question:
                 row[5] = bytes.decode(base64.b64decode(row[5]))
