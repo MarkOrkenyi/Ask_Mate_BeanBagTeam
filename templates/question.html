@@ -10,20 +10,27 @@
 </head>
 
 <body>
-    <form method="POST">
-        {% if question_id %}
-        <h3>Edit Question</h3>
+    {% if question_id %}
+    <form action="/question/{{question_id}}/edit-submit" , method="POST">
         {% else %}
-        <h3>New Question</h3>
-        {% endif %}
-        <label for="title">Question Title</label><br>
-        <input type="text" size="30" name="title" id="title" value={{title}}>
-        <p><label for="story">Question</label><br>
-            <textarea name="message" id="question" rows="5" cols="40">{{message}}</textarea></p>
-        {% if question_id %}
-        <p><input type="submit" value="Edit Question"></p>
-        {% else %}
-        <p><input type="submit" value="Add new Question"></p>
-        {% endif %}
-    </form>
+        <form action='/newquestion' , method="POST">
+            {% endif %}
+            <p></p>
+            {% if question_id %}
+            <h3>Edit Question</h3>
+            {% else %}
+            <h3>New Question</h3>
+            {% endif %}
+            <label for="title">Question Title</label><br>
+            <input type="text" size="30" name="title" id="title" value='{{title}}'>
+            <p><label for="story">Question</label><br>
+                <textarea name="message" id="message" rows="5" cols="40">{{message}}</textarea></p>
+            {% if question_id %}
+            <p><input type="submit" value="Edit Question"></p>
+            {% else %}
+            <p><input type="submit" value="Add new Question"></p>
+            {% endif %}
+        </form>
 </body>
+
+</html>

@@ -36,6 +36,9 @@
                 <td>{{question[3]}}</td>
             </tr>
         </table>
+        <form action=./{{question_id}}/edit method="POST">
+            <p><input type="submit" name="editquestion" value="Edit question" id="editquestion"></p>
+        </form>
         <p>Answers</p>
         <form action=./{{question_id}}/new-answer method="POST">
             <p><input type="submit" name="newanswer" value="New answer" id="newanswer"></p>
