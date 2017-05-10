@@ -67,6 +67,7 @@ def show_list():
                   "Time",
                   ]
     question_table = function.read_csv("./data/question.csv", True)
+    question_table = sorted(question_table, key=lambda time: time[1], reverse=False)
     return render_template('list.html', question_table=question_table, header_row=header_row)
 # OLLE end
 
