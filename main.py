@@ -15,6 +15,7 @@ def question_details(question_id):
         if question_id == row[0]:
             question = row
             break
+    print(questions_list)
     question_message = question[5]
     question_title = question[4]
     answers = []
@@ -40,7 +41,7 @@ def add_new_answer(question_id):
     to_add = []
     time = datetime.datetime.now()
     answer = str(request.form['newanswer'])
-    to_add.append(function.get_new_id("./data/answer.csv"))
+    to_add.append(function.get_new_id("./data/answer.csv", False))
     to_add.append(time)
     to_add.append(0)
     to_add.append(question_id)
@@ -68,6 +69,26 @@ def show_list():
     question_table = function.read_csv("./data/question.csv", True)
     return render_template('list.html', question_table=question_table, header_row=header_row)
 # OLLE end
+
+# Annamari begins
+
+
+@app.route('/newquestion', methods=['GET', 'POST'])
+def add_new_question():
+    if request.method == 'GET':
+        return render_template("question.html")
+
+    elif request.method == 'POST':
+        id_ = function.get_new_id('./data/question.csv', True)
+        submisson_time = datetime.datetime.now()
+        view_number = '0'
+        vote_number = '0'
+        title = request.form["title"]
+        message = request.form["message"]
+        fieldnames = [id_, submisson_time, view_number, vote_number, title, message]
+        function.write_csv('./data/question.csv', fieldnames, True)
+        return redirect("./")
+# Annamari ends
 
 
 if __name__ == '__main__':

@@ -39,21 +39,11 @@ def delete_question(question_id):
     return render_template("list.html", list_data=list_data)
 
 
-def get_id(id_data):
-    id_ = ['0']
-    for data in id_data:
-        id_.append(data[0])
-    print(id_)
-    max_id = max(map(int, id_))
-    print(max_id)
-    return (int(max_id) + 1)
-
-
 def remove(file_data, id_):
     for index, elements in enumerate(file_data):
         if elements[0] == id_:
             file_data.pop(index)
-            return file_data
+    return file_data
 
 
 def main():

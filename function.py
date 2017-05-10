@@ -34,10 +34,10 @@ def write_csv(filename, to_add, question):
             datawriter.writerow(row)
 
 
-def get_new_id(csvfile_path):
+def get_new_id(filename, questionoranswer):
     id_ = []
-    with open(csvfile_path) as csvfile:
-        for row in csvfile:
-            id_.append(row[0])
+    data = read_csv(filename, questionoranswer)
+    for row in data:
+        id_.append(row[0])
     max_id = max(map(int, id_))
     return (int(max_id) + 1)
