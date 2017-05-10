@@ -42,7 +42,8 @@
         <td>{{ row[5] }}</td>
         <td>{{ row[2] }}</td>
         <td>{{ row[3] }}</td>
-        <td>   
+        <td>
+               
             <a href="./question/{{ row[0] }}/edit">
                 <img src="./static/edit_pen.png" alt="Edit" style="width:16px; height:16px; text-decoration: none;">
             </a>
@@ -52,14 +53,9 @@
             </td>
             <td>{{ row[1] }}</td>
             <td style="border:2px solid black; border-collapse: collapse;">
-                <a href="./question/{{ row[0] }}/edit">
-                    <img src="./static/edit_pen.png" alt="Edit" style="width:16px; height:16px; text-decoration: none;">
-                </a>
-            </td>
-            <td style="border:2px solid black; border-collapse: collapse;">
-                <a href="./question/{{ row[0] }}/delet">
-                    <img src="./static/delete_bin.png" alt="Delete" style="width:16px; height:16px; text-decoration: none;">
-                </a>
+                <form action="./question/{{ row[0] }}/delete" method="GET">
+                    <input type="submit" value="Delete" />
+                </form>
             </td>
         </tr>
         {% endfor %}
