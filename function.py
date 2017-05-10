@@ -1,5 +1,6 @@
 import csv
 import base64
+import datetime
 
 
 def read_csv(filename, question):
@@ -9,6 +10,7 @@ def read_csv(filename, question):
     with open(filename) as data:
         content = csv.reader(data, delimiter=',')
         for row in content:
+            row[1] = datetime.datetime.utcfromtimestamp(row[1])
             row[4] = bytes.decode(base64.b64decode(row[4]))
             if question:
                 row[5] = bytes.decode(base64.b64decode(row[5]))
@@ -25,7 +27,17 @@ def write_csv(filename, to_add, question):
     with open(filename, mode="w") as data:
         datawriter = csv.writer(data, delimiter=',')
         for row in csv_content:
+            row[1] = row[1].strftime("%s")
             row[4] = bytes.decode(base64.b64encode(str.encode(row[4])))
             if question:
                 row[5] = bytes.decode(base64.b64encode(str.encode(row[5])))
             datawriter.writerow(row)
+
+
+def get_new_id(csvfile_path):
+    id_ = []
+    with open(csvfile_path) as csvfile:
+        for row in csvfile:
+            id_.append(row[0])
+    max_id = max(map(int, id_))
+    return (int(max_id) + 1)
