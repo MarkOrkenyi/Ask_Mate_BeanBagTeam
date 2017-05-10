@@ -15,7 +15,6 @@ def question_details(question_id):
         if question_id == row[0]:
             question = row
             break
-    print(questions_list)
     question_message = question[5]
     question_title = question[4]
     answers = []
@@ -47,6 +46,32 @@ def add_new_answer(question_id):
     to_add.append(question_id)
     to_add.append(answer)
     function.write_csv("./data/answer.csv", to_add, False)
+    return redirect("/question/{}".format(question_id))
+
+
+@app.route("/question/<question_id>/edit", methods=['POST'])
+def edit_question(question_id):
+    question_list = function.read_csv("./data/question.csv", True)
+    for row in question_list:
+        if row[0] == question_id:
+            question_title = row[4]
+            question_message = row[5]
+    return render_template("question.html", question_id=question_id, message=question_message, title=question_title)
+
+
+@app.route("/question/<question_id>/edit-submit", methods=['POST'])
+def submit_edit_question(question_id):
+    to_add = []
+    message = request.form['message']
+    title = request.form['title']
+    data = function.read_csv("./data/question.csv", True)
+    for row in data:
+        if row[0] == question_id:
+            for element in row:
+                to_add.append(element)
+    to_add[4] = title
+    to_add[5] = message
+    function.write_csv('./data/question.csv', to_add, True, True)
     return redirect("/question/{}".format(question_id))
 # MARK ends
 

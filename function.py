@@ -18,11 +18,15 @@ def read_csv(filename, question):
     return csv_content
 
 
-def write_csv(filename, to_add, question):
+def write_csv(filename, to_add, question, edit):
     '''Writes out the list of lists to a csv file.
     \nUse: write_csv(<filename>,<a list of lists to add>,<True:question, False:answer>'''
     csv_content = read_csv(filename, question)
-    print(csv_content)
+    if edit:
+        for row in csv_content:
+            print(row[0])
+            if row[0] == to_add[0]:
+                csv_content.pop(csv_content.index(row))
     csv_content.append(to_add)
     with open(filename, mode="w") as data:
         datawriter = csv.writer(data, delimiter=',')
