@@ -94,8 +94,38 @@ def show_list():
     question_table = function.read_csv("./data/question.csv", True)
     question_table = sorted(question_table, key=lambda time: time[1], reverse=True)
     return render_template('list.html', question_table=question_table, header_row=header_row)
-# OLLE end
 
+
+@app.route('/question/<question_id>/vote-up', methods=['POST', 'GET'])
+def question_vote_up(question_id):
+    to_add = []
+    csv_content = function.read_csv('./data/question.csv', True)
+    for row in csv_content:
+        if row[0] == question_id:
+            for element in row:
+                to_add.append(element)
+    votes = int(to_add[3])
+    votes += 1
+    to_add[3] = str(votes)
+    function.write_csv('./data/question.csv', to_add, True, True)
+    return redirect('./list')
+
+
+@app.route('/question/<question_id>/vote-down', methods=['POST', 'GET'])
+def question_vote_down(question_id):
+    to_add = []
+    csv_content = function.read_csv('./data/question.csv', True)
+    for row in csv_content:
+        if row[0] == question_id:
+            for element in row:
+                to_add.append(element)
+    votes = int(to_add[3])
+    votes -= 1
+    to_add[3] = str(votes)
+    function.write_csv('./data/question.csv', to_add, True, True)
+    return redirect('./list')
+
+# OLLE end
 # Annamari begins
 
 
