@@ -4,6 +4,8 @@ import function
 
 app = Flask(__name__)
 
+# Mark begins
+
 
 @app.route("/question/<question_id>")
 def question_details(question_id):
@@ -27,7 +29,21 @@ def question_details(question_id):
                            question_id=question_id)
 
 
+@app.route("/question/<question_id>/new-answer", methods=['POST'])
+def new_answer(question_id):
+    return render_template("answer.html")
+
+
+@app.route("/question/<question_id>/new-answer-submit", methods=['POST'])
+def add_new_answer(question_id):
+    answer = str(request.form('newanswer'))
+    return redirect("./")
+# MARK ends
+
+
 # OLLE begins
+
+
 @app.route("/")
 @app.route("/list")
 def show_list():
@@ -43,6 +59,7 @@ def show_list():
     question_table = function.read_csv("./data/question.csv", True)
     return render_template('list.html', question_table=question_table, header_row=header_row)
 # OLLE end
+
 
 if __name__ == '__main__':
     app.run(debug=True)
