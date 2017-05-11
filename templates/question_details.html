@@ -14,14 +14,22 @@
         td {
             border: 1px solid black;
         }
+        
+        h2 {
+            color: seagreen;
+        }
     </style>
 </head>
 
 <body>
     <div>
-        <h3>{{question_title}}</h3>
-        <p>{{question_message}}</p>
-        <p>Details</p>
+        <h2>{{question_title}}</h2>
+        <p>
+            <h3>{{question_message}}</h3>
+        </p>
+        <p>
+            <h2>Details</h2>
+        </p>
         <table>
             <tr>
                 <th align="center">ID</th>
@@ -36,13 +44,13 @@
                 <td>{{question[3]}}</td>
             </tr>
         </table>
-        <form action=./{{question_id}}/edit method="POST">
+        <form action=./{{question_id}}/edit method="GET">
             <p><input type="submit" name="editquestion" value="Edit question" id="editquestion"></p>
         </form>
-        <p>Answers</p>
-        <form action=./{{question_id}}/new-answer method="POST">
-            <p><input type="submit" name="newanswer" value="New answer" id="newanswer"></p>
-        </form>
+        <p>
+            <h2>Answers</h2>
+        </p>
+
         <table>
             <tr>
                 <th align="center">ID</th>
@@ -57,11 +65,11 @@
                 <td align="center">{{row[4]}}</td>
                 <td align="center">{{row[2]}}</td>
                 <td>
+                    <br>
                     <form action="/answer/{{ row[0] }}/vote-up" method="POST">
                         <input type=hidden value="{{question_id}}" name="questionid" />
                         <input align="center" type="submit" value="Vote-UP" />
                     </form>
-                    <br>
                     <form action="/answer/{{ row[0] }}/vote-down" method="POST">
                         <input type=hidden value="{{question_id}}" name="questionid" />
                         <input align="center" type="submit" value="Vote-DOWN" />
@@ -76,6 +84,9 @@
             </tr>
             {% endfor %}
         </table>
+        <form action=./{{question_id}}/new-answer method="GET">
+            <p><input type="submit" name="newanswer" value="New answer" id="newanswer"></p>
+        </form>
 
 </body>
 

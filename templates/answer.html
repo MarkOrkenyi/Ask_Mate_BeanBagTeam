@@ -2,11 +2,16 @@
 
 <head>
     <title>New answer</title>
+    <style>
+        h2 {
+            color: green;
+        }
+    </style>
 </head>
 
 <body>
-    <h3>New answer</h3>
-    <form action=/question/{{question_id}}/new-answer-submit method="POST">
+    <h2>New answer</h2>
+    <form action=/question/{{question_id}}/new-answer method="POST">
         <p><textarea rows="5" cols="50" name="newanswer" id="newanswer"></textarea></p>
         <p><input type=submit name=answer_submit value="Add answer" id=add_answer_button></p>
     </form>

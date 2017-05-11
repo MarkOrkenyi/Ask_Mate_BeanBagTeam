@@ -15,8 +15,9 @@ def show_list():
                   "Message",
                   "Views",
                   "Votes",
-                  "",
+                  "UP&DOWN",
                   "Time",
+                  "Delete"
                   ]
     question_table = function.read_csv("./data/question.csv", "question")
     question_table = sorted(question_table, key=lambda time_: time_[1], reverse=True)
@@ -58,24 +59,23 @@ def question_details(question_id):
                            question_id=question_id)
 
 
-@app.route('/newquestion', methods=['POST'])
+@app.route('/newquestion', methods=['GET', 'POST'])
 def add_new_question():
-    return render_template("question.html")
+    if request.method == 'GET':
+        return render_template("question.html")
 
-
-@app.route('/newquestion/submit_question', methods=['POST'])
-def submit_new_question():
-    id_ = function.get_new_id('./data/question.csv', "question")
-    submisson_time = function.convert_time(time.time(), "unix")
-    view_number = '0'
-    vote_number = '0'
-    title = request.form["title"]
-    message = request.form["message"]
-    new_row = [id_, submisson_time, view_number, vote_number, title, message]
-    csv_data = function.read_csv("./data/question.csv", "question")
-    csv_data.append(new_row)
-    function.write_csv('./data/question.csv', csv_data, "question")
-    return redirect("./")
+    if request.method == "POST":
+        id_ = function.get_new_id('./data/question.csv', "question")
+        submisson_time = function.convert_time(time.time(), "unix")
+        view_number = '0'
+        vote_number = '0'
+        title = request.form["title"]
+        message = request.form["message"]
+        new_row = [id_, submisson_time, view_number, vote_number, title, message]
+        csv_data = function.read_csv("./data/question.csv", "question")
+        csv_data.append(new_row)
+        function.write_csv('./data/question.csv', csv_data, "question")
+        return redirect("./")
 
 
 @app.route('/question/<question_id>/delete', methods=['GET', 'POST'])
@@ -89,54 +89,52 @@ def delete_question(question_id):
         return redirect('./list')
 
 
-@app.route("/question/<question_id>/new-answer", methods=['POST'])
+@app.route("/question/<question_id>/new-answer", methods=['POST', 'GET'])
 def new_answer(question_id):
-    return render_template("answer.html", question_id=question_id)
+    if request.method == 'GET':
+        return render_template("answer.html", question_id=question_id)
+
+    if request.method == 'POST':
+        to_add = []
+        answer = str(request.form['newanswer'])
+        to_add.append(function.get_new_id("./data/answer.csv", "answer"))
+        to_add.append(function.convert_time(time.time(), "unix"))
+        to_add.append(0)
+        to_add.append(question_id)
+        to_add.append(answer)
+        csv_data = function.read_csv("./data/answer.csv", "answer")
+        csv_data.append(to_add)
+        function.write_csv("./data/answer.csv", csv_data, "answer")
+        return redirect("/question/{}".format(question_id))
 
 
-@app.route("/question/<question_id>/new-answer-submit", methods=['POST'])
-def add_new_answer(question_id):
-    to_add = []
-    answer = str(request.form['newanswer'])
-    to_add.append(function.get_new_id("./data/answer.csv", "answer"))
-    to_add.append(function.convert_time(time.time(), "unix"))
-    to_add.append(0)
-    to_add.append(question_id)
-    to_add.append(answer)
-    csv_data = function.read_csv("./data/answer.csv", "answer")
-    csv_data.append(to_add)
-    function.write_csv("./data/answer.csv", csv_data, "answer")
-    return redirect("/question/{}".format(question_id))
-
-
-@app.route("/question/<question_id>/edit", methods=['POST'])
+@app.route("/question/<question_id>/edit", methods=['POST', 'GET'])
 def edit_question(question_id):
-    question_list = function.read_csv("./data/question.csv", "question")
-    for row in question_list:
-        if row[0] == question_id:
-            question_title = row[4]
-            question_message = row[5]
-    return render_template("question.html", question_id=question_id, message=question_message, title=question_title)
+    if request.method == 'GET':
+        question_list = function.read_csv("./data/question.csv", "question")
+        for row in question_list:
+            if row[0] == question_id:
+                question_title = row[4]
+                question_message = row[5]
+        return render_template("question.html", question_id=question_id, message=question_message, title=question_title)
 
-
-@app.route("/question/<question_id>/edit-submit", methods=['POST'])
-def submit_edit_question(question_id):
-    to_add = []
-    message = request.form['message']
-    title = request.form['title']
-    data = function.read_csv("./data/question.csv", "question")
-    for row in data:
-        if row[0] == question_id:
-            for element in row:
-                to_add.append(element)
-    for row in data:
-        if row[0] == to_add[0]:
-            data.pop(data.index(row))
-    to_add[4] = title
-    to_add[5] = message
-    data.append(to_add)
-    function.write_csv('./data/question.csv', data, "question")
-    return redirect("/question/{}".format(question_id))
+    if request.method == 'POST':
+        to_add = []
+        message = request.form['message']
+        title = request.form['title']
+        data = function.read_csv("./data/question.csv", "question")
+        for row in data:
+            if row[0] == question_id:
+                for element in row:
+                    to_add.append(element)
+        for row in data:
+            if row[0] == to_add[0]:
+                data.pop(data.index(row))
+        to_add[4] = title
+        to_add[5] = message
+        data.append(to_add)
+        function.write_csv('./data/question.csv', data, "question")
+        return redirect("/question/{}".format(question_id))
 
 
 @app.route('/question/<question_id>/vote-up', methods=['POST', 'GET'])
