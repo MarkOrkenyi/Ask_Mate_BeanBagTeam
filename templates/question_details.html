@@ -46,12 +46,33 @@
         <table>
             <tr>
                 <th align="center">ID</th>
+                <th align="center">Time</th>
                 <th align="center">Answer</th>
+                <th align="center">Votes</th>
             </tr>
             {% for row in answers %}
             <tr>
-                <td>{{row[0]}}</td>
-                <td>{{row[4]}}</td>
+                <td align="center">{{row[0]}}</td>
+                <td align="center">{{row[1]}}</td>
+                <td align="center">{{row[4]}}</td>
+                <td align="center">{{row[2]}}</td>
+                <td>
+                    <form action="/answer/{{ row[0] }}/vote-up" method="POST">
+                        <input type=hidden value="{{question_id}}" name="questionid" />
+                        <input align="center" type="submit" value="Vote-UP" />
+                    </form>
+                    <br>
+                    <form action="/answer/{{ row[0] }}/vote-down" method="POST">
+                        <input type=hidden value="{{question_id}}" name="questionid" />
+                        <input align="center" type="submit" value="Vote-DOWN" />
+                    </form>
+                </td>
+                <td style="border:2px solid black; border-collapse: collapse;">
+                    <form action="/answer/{{ row[0] }}/delete" method="POST">
+                        <input type=hidden value="{{question_id}}" name="questionid" />
+                        <input align="center" type="submit" value="Delete" />
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </table>

@@ -13,7 +13,7 @@
     {% if question_id %}
     <form action="/question/{{question_id}}/edit-submit" , method="POST">
         {% else %}
-        <form action='/newquestion' , method="POST">
+        <form action='/newquestion/submit_question' , method="POST">
             {% endif %}
             <p></p>
             {% if question_id %}
