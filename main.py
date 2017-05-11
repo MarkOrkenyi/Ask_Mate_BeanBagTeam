@@ -15,7 +15,7 @@ def show_list():
                   "Message",
                   "Views",
                   "Votes",
-                  "UP&DOWN",
+                  "",
                   "Time",
                   "Delete"
                   ]

@@ -101,11 +101,11 @@
                     <br>
                     <form action="/answer/{{ row[0] }}/vote-up" method="POST">
                         <input type=hidden value="{{question_id}}" name="questionid" />
-                        <input align="center" type="submit" value="Vote-UP" />
+                        <input align="center" type="submit" value="&#9650;" />
                     </form>
                     <form action="/answer/{{ row[0] }}/vote-down" method="POST">
                         <input type=hidden value="{{question_id}}" name="questionid" />
-                        <input align="center" type="submit" value="Vote-DOWN" />
+                        <input align="center" type="submit" value="&#9660;" />
                     </form>
                 </td>
                 <td width="5%">
