@@ -3,68 +3,101 @@
 <head>
     <title>Question details</title>
     <style>
-        table {
-            border: 2px solid black;
+        table.answers {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
         }
         
-        th {
-            border: 1px solid black;
+        table.details {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 20%;
         }
         
-        td {
-            border: 1px solid black;
+        td.answers,
+        {}
+        
+        th.answers {
+            font-size: 20px;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 4px;
+            background-color: palegreen;
+        }
+        
+        th.details {
+            font-size: 20px;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 4px;
+            background-color: lightsalmon;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
         
         h2 {
             color: seagreen;
+        }
+        
+        h3 {
+            font-size: 30px;
+        }
+        
+        h1 {
+            font-size: 40px;
         }
     </style>
 </head>
 
 <body>
     <div>
-        <h2>{{question_title}}</h2>
+        <h1>{{question_title}}</h1>
         <p>
             <h3>{{question_message}}</h3>
         </p>
         <p>
             <h2>Details</h2>
         </p>
-        <table>
+        <table class="details">
             <tr>
-                <th align="center">ID</th>
-                <th align="center">Time</th>
-                <th align="center">Views</th>
-                <th align="center">Vote</th>
+                <th class="details" align="left">ID</th>
+                <th class="details" align="left">Time</th>
+                <th class="details" align="left">Views</th>
+                <th class="details" align="left">Vote</th>
             </tr>
             <tr>
-                <td>{{question[0]}}</td>
-                <td>{{question[1]}}</td>
-                <td>{{question[2]}}</td>
-                <td>{{question[3]}}</td>
+                <td class="details">{{question[0]}}</td>
+                <td class="details">{{question[1]}}</td>
+                <td class="details">{{question[2]}}</td>
+                <td class="details">{{question[3]}}</td>
             </tr>
         </table>
         <form action=./{{question_id}}/edit method="GET">
-            <p><input type="submit" name="editquestion" value="Edit question" id="editquestion"></p>
+            <p><input type="submit" name="editquestion" value="Edit question" id="editquestion" style="font-size: 25px"></p>
         </form>
         <p>
             <h2>Answers</h2>
         </p>
 
-        <table>
+        <table class="answers">
             <tr>
-                <th align="center">ID</th>
-                <th align="center">Time</th>
-                <th align="center">Answer</th>
-                <th align="center">Votes</th>
+                <th class="answers" align="center">ID</th>
+                <th class="answers" align="center">Time</th>
+                <th class="answers" align="center">Answer</th>
+                <th class="answers" align="center">Votes</th>
+                <th class="answers" align="center"></th>
+                <th class="answers" align="center"></th>
             </tr>
             {% for row in answers %}
             <tr>
-                <td align="center">{{row[0]}}</td>
-                <td align="center">{{row[1]}}</td>
-                <td align="center">{{row[4]}}</td>
-                <td align="center">{{row[2]}}</td>
-                <td>
+                <td width="5%" class="answers" align="center">{{row[0]}}</td>
+                <td width="10%" class="answers" align="center">{{row[1]}}</td>
+                <td width="70%" class="answers" align="center">{{row[4]}}</td>
+                <td width="5%" class="answers" align="center">{{row[2]}}</td>
+                <td width="5%">
                     <br>
                     <form action="/answer/{{ row[0] }}/vote-up" method="POST">
                         <input type=hidden value="{{question_id}}" name="questionid" />
@@ -75,7 +108,7 @@
                         <input align="center" type="submit" value="Vote-DOWN" />
                     </form>
                 </td>
-                <td style="border:2px solid black; border-collapse: collapse;">
+                <td width="5%">
                     <form action="/answer/{{ row[0] }}/delete" method="POST">
                         <input type=hidden value="{{question_id}}" name="questionid" />
                         <input align="center" type="submit" value="Delete" />
@@ -85,7 +118,7 @@
             {% endfor %}
         </table>
         <form action=./{{question_id}}/new-answer method="GET">
-            <p><input type="submit" name="newanswer" value="New answer" id="newanswer"></p>
+            <p><input type="submit" name="newanswer" value="New answer" id="newanswer" style="font-size: 25px"></p>
         </form>
 
 </body>

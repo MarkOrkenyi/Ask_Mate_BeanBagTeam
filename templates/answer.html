@@ -1,10 +1,13 @@
 <html>
 
 <head>
+
     <title>New answer</title>
     <style>
         h2 {
+            font-family: arial, sans-serif;
             color: green;
+            font-size: 50px;
         }
     </style>
 </head>
@@ -12,8 +15,9 @@
 <body>
     <h2>New answer</h2>
     <form action=/question/{{question_id}}/new-answer method="POST">
-        <p><textarea rows="5" cols="50" name="newanswer" id="newanswer"></textarea></p>
-        <p><input type=submit name=answer_submit value="Add answer" id=add_answer_button></p>
+        <p>
+            <textarea rows="5" cols="50" name="newanswer" id="newanswer" style="font-size: 20px"></textarea></p>
+        <p><input type=submit name=answer_submit value=" Add answer " id=add_answer_button style="font-size: 30px"></p>
     </form>
 </body>
 

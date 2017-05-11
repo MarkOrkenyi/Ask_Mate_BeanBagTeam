@@ -11,33 +11,44 @@
 
     <style>
         h2 {
+            font-family: arial, sans-serif;
             color: green;
+            font-size: 50px;
+        }
+        
+        h3 {
+            font-family: arial, sans-serif;
+            color: black;
+            font-size: 25px;
+            font-style: italic;
         }
     </style>
 </head>
 
 <body>
-    <center>
-        {% if question_id %}
-        <form action="/question/{{question_id}}/edit" , method="POST">
-            <h2>Edit Question</h2>
-            <label for="title">Edit Question Title</label><br>
-            <input type="text" size="30" name="title" id="title" value='{{title}}'>
+
+    {% if question_id %}
+    <form action="/question/{{question_id}}/edit" , method="POST">
+        <h2>Edit Question</h2>
+        <h3><label for="title">Edit Question Title</label><br>
+            <input type="text" size="30" name="title" id="title" value='{{title}}' style="font-size: 20px">
             <p><label for="story">Edit Question</label><br>
-                <textarea name="message" id="message" rows="5" cols="40">{{message}}</textarea></p>
-            <p><input type="submit" value="Edit Question"></p>
-        </form>
-        {% else %}
-        <form action='/newquestion' , method="POST">
-            <h2>New Question</h2>
-            <label for="title">Add New Question Title</label><br>
-            <input type="text" size="30" name="title" id="title" value='{{title}}'>
+                <textarea name="message" id="message" rows="5" cols="40" style="font-size: 20px">{{message}} </textarea></p>
+            <p><input type="submit" value="Edit Question" style="font-size: 30px"></p>
+        </h3>
+    </form>
+    {% else %}
+    <form action='/newquestion' , method="POST">
+        <h2>New Question</h2>
+        <h3><label for="title">Add New Question Title</label><br>
+            <input type="text" size="30" name="title" id="title" value='{{title}}' style="font-size:20px">
             <p><label for="story">Add New Question</label><br>
-                <textarea name="message" id="message" rows="5" cols="40">{{message}}</textarea></p>
-            <p><input type="submit" value="Add new Question"></p>
-        </form>
-        {% endif %}
-    </center>
+                <textarea name="message" id="message" rows="5" cols="40" style="font-size:20px">{{message}}</textarea></p>
+            <p><input type="submit" value="Add new Question" style="font-size:30px"></p>
+        </h3>
+    </form>
+    {% endif %}
+
 </body>
 
 </html>
