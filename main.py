@@ -213,11 +213,11 @@ def answer_vote_down(answer_id):
     to_add = []
     csv_data = function.read_csv('./data/answer.csv', "answer")
     for row in csv_data:
-        if row[3] == question_id:
+        if row[0] == answer_id:
             for element in row:
                 to_add.append(element)
     for row in csv_data:
-        if row[3] == question_id:
+        if row[0] == answer_id:
             csv_data.pop(csv_data.index(row))
     votes = int(to_add[2])
     votes -= 1
