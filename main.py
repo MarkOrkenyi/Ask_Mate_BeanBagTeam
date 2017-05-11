@@ -36,6 +36,7 @@ def question_details(question_id):
     question_title = question[4]
     answers = []
     answers_list = function.read_csv("./data/answer.csv", "answer")
+    answers_list = sorted(answers_list, key=lambda id_: id_[0],)
     for row in answers_list:
         if question_id == row[3]:
             answers.append(row)
