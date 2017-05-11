@@ -17,25 +17,27 @@
 </head>
 
 <body>
-    {% if question_id %}
-    <form action="/question/{{question_id}}/edit" , method="POST">
-        <h2>Edit Question</h2>
-        <label for="title">Edit Question Title</label><br>
-        <input type="text" size="30" name="title" id="title" value='{{title}}'>
-        <p><label for="story">Edit Question</label><br>
-            <textarea name="message" id="message" rows="5" cols="40">{{message}}</textarea></p>
-        <p><input type="submit" value="Edit Question"></p>
-    </form>
-    {% else %}
-    <form action='/newquestion' , method="POST">
-        <h2>New Question</h2>
-        <label for="title">Add New Question Title</label><br>
-        <input type="text" size="30" name="title" id="title" value='{{title}}'>
-        <p><label for="story">Add New Question</label><br>
-            <textarea name="message" id="message" rows="5" cols="40">{{message}}</textarea></p>
-        <p><input type="submit" value="Add new Question"></p>
-    </form>
-    {% endif %}
+    <center>
+        {% if question_id %}
+        <form action="/question/{{question_id}}/edit" , method="POST">
+            <h2>Edit Question</h2>
+            <label for="title">Edit Question Title</label><br>
+            <input type="text" size="30" name="title" id="title" value='{{title}}'>
+            <p><label for="story">Edit Question</label><br>
+                <textarea name="message" id="message" rows="5" cols="40">{{message}}</textarea></p>
+            <p><input type="submit" value="Edit Question"></p>
+        </form>
+        {% else %}
+        <form action='/newquestion' , method="POST">
+            <h2>New Question</h2>
+            <label for="title">Add New Question Title</label><br>
+            <input type="text" size="30" name="title" id="title" value='{{title}}'>
+            <p><label for="story">Add New Question</label><br>
+                <textarea name="message" id="message" rows="5" cols="40">{{message}}</textarea></p>
+            <p><input type="submit" value="Add new Question"></p>
+        </form>
+        {% endif %}
+    </center>
 </body>
 
 </html>

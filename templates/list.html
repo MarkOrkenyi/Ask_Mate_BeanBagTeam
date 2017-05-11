@@ -28,23 +28,24 @@
 </head>
 
 <body>
-    <h1>AskMate</h1>
-    <h2>List of Questions</h2>
+    <center>
+        <h1>AskMate</h1>
+        <h2>List of Questions</h2>
 
-    <form action="./newquestion" method="GET">
-        <input type="submit" value="Ask new Question" />
-    </form>
-    <p></p>
-    <table>
-        <tr>
-            {% for cell in header_row %}
-            <th>{{ cell }}</th>
-            {% endfor %}
-        </tr>
-        {% for row in question_table %}
-        <tr>
-            <td>{{ row[0] }}</td>
-            <td><a href="./question/{{row[0]}}">{{ row[4] }}</td>
+        <form action="./newquestion" method="GET">
+            <input type="submit" value="Ask new Question" />
+        </form>
+        <p></p>
+        <table>
+            <tr>
+                {% for cell in header_row %}
+                <th>{{ cell }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in question_table %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td><a href="./question/{{row[0]}}">{{ row[4] }}</td>
         <td>{{ row[5] }}</td>
         <td width:"300px">{{ row[2] }}</td>
         <td>{{ row[3] }}</td>
@@ -61,7 +62,7 @@
         {% endfor %}
         
     </table>
-
+</center>
 
 </body>
 
