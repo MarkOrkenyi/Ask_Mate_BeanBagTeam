@@ -69,7 +69,7 @@ def add_new_question():
 
     if request.method == "POST":
         id_ = function.get_new_id('./data/question.csv', "question")
-        submisson_time = function.convert_time(time.time(), "encode")
+        submisson_time = function.convert_time(time.time(), "decode")
         view_number = '0'
         vote_number = '0'
         title = request.form["title"]
