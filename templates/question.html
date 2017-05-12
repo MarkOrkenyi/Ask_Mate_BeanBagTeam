@@ -34,7 +34,7 @@
     <form action="/question/{{question_id}}/edit" , method="POST">
         <h2 style="color: salmon">Edit Question</h2>
         <h3><label for="title">Edit Title</label><br>
-            <input type="text" size="30" name="title" id="title" value='{{title}}' style="font-size: 15px">
+            <input type="text" size="30" name="title" id="title" value='{{title}}' style="font-size: 15px" minlength="10">
             <p><label for="story">Edit Question</label><br>
                 <textarea name="message" id="message" rows="5" cols="40" style="font-size: 15px">{{message}} </textarea></p>
             <p><input type="submit" value="Edit Question" style="font-size: 20px"></p>
@@ -44,7 +44,7 @@
     <form action='/newquestion' , method="POST">
         <h2 style="color:limegreen">Add New Question</h2>
         <h3><label for="title">Title</label><br>
-            <input type="text" size="30" name="title" id="title" value='{{title}}' style="font-size:15px">
+            <input type="text" size="30" name="title" id="title" value='{{title}}' style="font-size:15px" minlength="10">
             <p><label for="story">New Question</label><br>
                 <textarea name="message" id="message" rows="5" cols="40" style="font-size:15px">{{message}}</textarea></p>
             <p><input type="submit" value="Add new Question" style="font-size:20px"></p>
